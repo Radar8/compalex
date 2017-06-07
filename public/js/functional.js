@@ -16,11 +16,13 @@ Data = {
     },
 
     getTableData: function (url) {
-        $('div.modal-background iframe').attr('src', url);
+        $('#content-block').html('<img src="/public/img/loading.gif" alt="Loading...">');
+        $('#content-block').load(url);
         $('div.modal-background').addClass('visible');
     },
 
     hideTableData: function () {
+        $('#content-block').html('');
         $('div.modal-background').removeClass('visible');
     }
-}
+};

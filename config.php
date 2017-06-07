@@ -1,7 +1,11 @@
 <?php
 
 define('DIR_ROOT', dirname(__FILE__));
-define('ENVIRONMENT_FILE', DIR_ROOT . '/.environment');
+
+$default_conf_file = '/.environment';
+$local_conf_file = '/environment_local.conf';
+define('ENVIRONMENT_FILE', DIR_ROOT . (file_exists($local_conf_file)? $local_conf_file : $default_conf_file));
+
 define('DRIVER_DIR', DIR_ROOT . '/driver/');
 define('TEMPLATE_DIR', DIR_ROOT . '/template/');
 

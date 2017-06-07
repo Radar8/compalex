@@ -13,7 +13,7 @@
 <body>
 <div class="modal-background" onclick="Data.hideTableData(); return false;">
     <div class="modal">
-        <iframe src="" frameborder="0"></iframe>
+        <div id="content-block"></div>
     </div>
 </div>
 
@@ -69,7 +69,10 @@
         <tr class="data">
             <?php foreach (array('fArray', 'sArray') as $blockType) { ?>
             <td class="type-<?php echo $_REQUEST['action']; ?>">
-                <h3><?php echo $tableName; ?> <sup style="color: red;"><?php echo count($data[$blockType]); ?></sup></h3>
+                <?php
+                   $fields_count = count($data[$blockType]);
+                ?>
+                <h3<?php if($fields_count == 0){echo ' style="color: #c0c0c0;"';}?> ><?php echo $tableName; ?> <sup<?php if($fields_count > 0){echo ' style="color: orange;"';}?>><?php echo $fields_count; ?></sup></h3>
                 <div class="table-additional-info">
                     <?php if(isset($additionalTableInfo[$tableName][$blockType])) {
                             foreach ($additionalTableInfo[$tableName][$blockType] as $paramKey => $paramValue) {
@@ -78,11 +81,13 @@
                         }
                     ?>
                 </div>
-                <?php if ($data[$blockType]) { ?>
+                <?php if ($data[$blockType]) {
+                    ksort($data[$blockType]);
+                  ?>
                     <ul>
                         <?php foreach ($data[$blockType] as $fieldName => $tparam) { ?>
                             <li <?php if (isset($tparam['isNew']) && $tparam['isNew']) {
-                                echo 'style="color: red;" class="new" ';
+                                echo 'style="color: green;" class="new" ';
                             } ?>><b><?php echo $fieldName; ?></b> <?php echo $tparam['dtype']; ?> </li>
                         <?php } ?>
                     </ul>
