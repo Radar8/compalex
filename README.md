@@ -15,7 +15,7 @@ Compalex is only supported by PHP 5.4 and up with PDO extension.
 	
 Open `.environment`. You'll see configuration params
 (or copy file `.environment` to local file settings `environment_local.ini`:
- $ cp .environment environment_local.ini
+        $ cp .environment environment_local.ini
 )
 
 ```ini
